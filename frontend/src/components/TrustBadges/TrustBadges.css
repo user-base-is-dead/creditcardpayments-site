@@ -1,0 +1,108 @@
+.trust-badges-section {
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(124, 58, 237, 0.12);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+  padding: 6rem 0;
+  position: relative;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+
+@media (max-width: 968px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.trust-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .trust-card {
+    align-items: flex-start;
+    text-align: left;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+.trust-icon-wrapper {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: #090518;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.trust-card:hover .trust-icon-wrapper {
+  transform: translateY(-5px) scale(1.05);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-accent);
+}
+
+.trust-icon {
+  font-size: 1.75rem;
+  z-index: 2;
+}
+
+.trust-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.trust-card:hover .trust-glow {
+  opacity: 1;
+}
+
+.trust-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.trust-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 240px;
+}
+
+@media (max-width: 480px) {
+  .trust-desc {
+    max-width: 100%;
+  }
+}
