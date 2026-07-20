@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" width="40" height="24" role="img" aria-label="JCB">
+  <rect width="40" height="24" rx="3" fill="#fff" stroke="#e6ebf1" />
+  <rect x="5" y="4" width="9" height="16" rx="2" fill="#0B4EA2" />
+  <rect x="15.5" y="4" width="9" height="16" rx="2" fill="#C1272D" />
+  <rect x="26" y="4" width="9" height="16" rx="2" fill="#0E8A44" />
+  <text x="9.5" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="8" fill="#fff">J</text>
+  <text x="20" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="8" fill="#fff">C</text>
+  <text x="30.5" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="8" fill="#fff">B</text>
+</svg>

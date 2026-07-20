@@ -1,0 +1,504 @@
+/* ─── Docs — professional documentation layout ─── */
+.docs {
+  background: var(--bg-white);
+  color: var(--text-body);
+  min-height: 100vh;
+}
+
+.docs-shell {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 7rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Sidebar */
+.docs-sidebar {
+  position: sticky;
+  top: 6.5rem;
+  align-self: start;
+}
+
+.docs-sidebar-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  padding-left: 0.85rem;
+}
+
+.docs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-left: 1px solid var(--border-light);
+}
+
+.docs-nav-link {
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  transition: color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+
+.docs-nav-link:hover {
+  color: var(--text-heading);
+}
+
+.docs-nav-link.active {
+  color: var(--primary-dark);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+
+.docs-sidebar-cta {
+  margin-top: 1.5rem;
+  padding-left: 0.85rem;
+}
+
+.docs-sidebar-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.docs-sidebar-btn:hover {
+  text-decoration: underline;
+}
+
+/* Main */
+.docs-main {
+  max-width: 760px;
+}
+
+.docs-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+}
+
+.docs-breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.docs-breadcrumb a:hover {
+  color: var(--primary-dark);
+}
+
+.docs-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.docs-lede {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  margin-bottom: 1.1rem;
+}
+
+.docs-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.docs-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.docs-meta-sep {
+  opacity: 0.5;
+}
+
+/* Sections */
+.docs-section {
+  scroll-margin-top: 6.5rem;
+  padding: 2.25rem 0 0.5rem;
+}
+
+.docs-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.docs-section h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.2rem;
+}
+
+.docs-section p {
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-bottom: 1rem;
+}
+
+.docs-section p:last-child {
+  margin-bottom: 0;
+}
+
+.docs-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 2.5rem 0 0;
+}
+
+/* Per-service anchor blocks (linked from the homepage "View Details"). */
+.docs-services {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.docs-service {
+  scroll-margin-top: 6.5rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--border-light);
+}
+
+.docs-service h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.3rem;
+}
+
+.docs-service:target {
+  border-left-color: var(--primary);
+}
+
+.docs-service:target h3 {
+  color: var(--primary-dark);
+}
+
+/* Lists */
+.docs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.docs-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.docs-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* Steps */
+.docs-steps {
+  list-style: none;
+  counter-reset: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.docs-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.docs-step-num {
+  flex-shrink: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.docs-step-body p {
+  margin-bottom: 0;
+}
+
+/* Table */
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.docs-table th,
+.docs-table td {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+.docs-table tr:last-child th,
+.docs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-table th {
+  width: 40%;
+  font-weight: 600;
+  color: var(--text-heading);
+  background: var(--bg-light);
+}
+
+.docs-table td {
+  color: var(--text-body);
+}
+
+/* Note callouts */
+.docs-note {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+}
+
+.docs-note p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.docs-note-icon {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1.65;
+}
+
+.docs-note-success {
+  border-left-color: var(--primary);
+}
+
+.docs-note-success .docs-note-icon {
+  color: var(--primary-dark);
+}
+
+/* FAQ */
+.docs-faq {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-light);
+  margin-top: 0.5rem;
+}
+
+.docs-faq-item {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.docs-faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.docs-faq-chevron {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+
+.docs-faq-item.open .docs-faq-chevron {
+  transform: rotate(90deg);
+  color: var(--primary);
+}
+
+.docs-faq-a {
+  padding: 0 0.25rem 1.1rem;
+}
+
+.docs-faq-a p {
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.75;
+}
+
+/* Footer CTA */
+.docs-foot {
+  margin-top: 3rem;
+  padding: 1.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.docs-foot h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.25rem;
+}
+
+.docs-foot p {
+  color: var(--text-body);
+  font-size: 0.92rem;
+}
+
+.docs-foot-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.docs-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.15rem;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.docs-btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.docs-btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.docs-btn-secondary {
+  background: var(--bg-white);
+  color: var(--text-heading);
+  border: 1px solid var(--border-light);
+}
+
+.docs-btn-secondary:hover {
+  border-color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .docs-shell {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 6rem;
+  }
+
+  .docs-sidebar {
+    position: sticky;
+    top: 4.5rem;
+    z-index: 5;
+    background: var(--bg-white);
+    margin: 0 -1.5rem;
+    padding: 0.6rem 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .docs-sidebar-eyebrow,
+  .docs-sidebar-cta {
+    display: none;
+  }
+
+  .docs-nav {
+    flex-direction: row;
+    border-left: none;
+    gap: 0.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .docs-nav-link {
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    margin-left: 0;
+    border-radius: 0;
+  }
+
+  .docs-nav-link.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--primary);
+  }
+
+  .docs-main {
+    max-width: 100%;
+  }
+
+  .docs-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

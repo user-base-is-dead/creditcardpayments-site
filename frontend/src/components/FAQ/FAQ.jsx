@@ -22,7 +22,7 @@ export default function FAQ() {
     },
     {
       question: 'Is there any limit on the amount I can transfer?',
-      answer: 'The minimum transfer amount is ₹500 and the maximum is ₹5,00,000 per transaction. Daily limits may vary based on your credit card limit and bank policies.'
+      answer: 'The minimum transfer amount is ₹10,000 and the maximum is ₹5,00,000 per transaction. Daily limits may vary based on your credit card limit and bank policies.'
     },
     {
       question: 'Is this service safe and RBI compliant?',
@@ -65,10 +65,7 @@ export default function FAQ() {
                   >
                     <span className="faq-question-text">{faq.question}</span>
                     <span className="faq-toggle">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                      </svg>
+                      <img src="/icons/faq-plus.svg" width="16" height="16" alt="" />
                     </span>
                   </button>
                   <div className="faq-answer-wrap">

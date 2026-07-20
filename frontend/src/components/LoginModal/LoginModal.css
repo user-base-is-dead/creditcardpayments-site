@@ -1,0 +1,115 @@
+.login-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.login-modal {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 1.75rem 1.75rem 1.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.login-modal-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-light);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.lm-tab {
+  flex: 1;
+  padding: 0.55rem;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--text-body);
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lm-tab.active {
+  background: var(--bg-white);
+  color: var(--text-heading);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.lm-form { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.lm-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.lm-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: -0.5rem;
+}
+
+.lm-field { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.lm-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.lm-field input {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: 9px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: var(--bg-light);
+}
+
+.lm-field input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--bg-white);
+}
+
+.lm-error {
+  font-size: 0.82rem;
+  color: #dc2626;
+}
+
+.lm-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 9px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 0.25rem;
+}
+
+.lm-btn:hover:not(:disabled) { background: var(--primary-dark); }
+.lm-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.lm-trust {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}

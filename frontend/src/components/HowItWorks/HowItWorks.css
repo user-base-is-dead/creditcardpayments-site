@@ -55,6 +55,16 @@
   color: var(--text-white);
 }
 
+/* Step icons are now <img>; recolor them to white on the active step
+   and inside the visual card (both sit on a green background). */
+.step-item.active .step-icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+.visual-card-icon img {
+  filter: brightness(0) invert(1);
+}
+
 .step-item.active .step-title {
   color: var(--text-white);
 }

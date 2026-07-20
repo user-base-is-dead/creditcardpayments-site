@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { whatsAppUrl } from '../../config';
 import './SwipeSimulator.css';
 
 export default function SwipeSimulator() {
@@ -128,7 +129,7 @@ export default function SwipeSimulator() {
       `- Flat fee (0.85%): ${formatCurrency(feeVal)}\n` +
       `- Instant Settlement: ${formatCurrency(settlementVal)}\n\n` +
       `Please issue a real-world settlement payment link.`;
-    window.open(`https://wa.me/919999999999?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(whatsAppUrl(message), '_blank');
   };
 
   return (
@@ -182,7 +183,7 @@ export default function SwipeSimulator() {
                 onMouseDown={handleDragStart}
                 onTouchStart={handleDragStart}
               >
-                <div className="sim-card-logo">⚡</div>
+                <div className="sim-card-logo"><img src="/icons/icon-bolt-white.svg" width="20" height="20" alt="" /></div>
                 <div className="sim-card-chip"></div>
                 <div className="sim-card-number">•••• •••• 5000</div>
               </div>
@@ -240,7 +241,7 @@ export default function SwipeSimulator() {
 
           <div className="success-actions">
             <button onClick={handleWhatsAppRedirect} className="btn btn-primary w-full">
-              Settle in Real Life ⚡
+              Settle in Real Life <img src="/icons/icon-bolt-white.svg" width="14" height="14" alt="" style={{ verticalAlign: 'middle' }} />
             </button>
             <button onClick={handleReset} className="btn btn-secondary w-full">
               Try Another Amount

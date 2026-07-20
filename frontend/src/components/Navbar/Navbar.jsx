@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { getUser, clearSession } from '../../lib/api';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -7,8 +8,13 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const location = useLocation();
-  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+  const user = getUser();
+
+  const handleLogout = () => {
+    clearSession();
+    window.location.href = '/';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,48 +28,13 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  const handleNavClick = (sectionId) => {
-    setIsMobileMenuOpen(false);
-    if (isHomePage) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      navigate('/', { state: { scrollTo: sectionId } });
-    }
-  };
-
-  useEffect(() => {
-    if (isHomePage && location.state?.scrollTo) {
-      const sectionId = location.state.scrollTo;
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-      window.history.replaceState({}, document.title);
-    }
-  }, [location, isHomePage]);
-
   return (
     <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-pill">
         {/* Brand Logo */}
         <Link to="/" className="navbar-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <div className="logo-icon-wrapper">
-            <svg viewBox="0 0 32 32" className="logo-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="14" fill="url(#nav-logo-grad)" />
-              <path d="M12 10L16 16L12 22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M17 10L21 16L17 22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-              <defs>
-                <linearGradient id="nav-logo-grad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#3b82f6" />
-                  <stop offset="1" stopColor="#1d4ed8" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src="/icons/logo.svg" className="logo-icon" width="32" height="32" alt="CreditCardPay logo" />
           </div>
           <span className="logo-text">
             CreditCard<span className="logo-accent">Pay</span>
@@ -72,30 +43,50 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="navbar-links">
-          <button 
-            onClick={() => isHomePage ? window.scrollTo({ top: 0, behavior: 'smooth' }) : navigate('/')} 
+          <Link
+            to="/"
+            onClick={() => isHomePage && window.scrollTo({ top: 0, behavior: 'smooth' })}
             className={`nav-link ${isHomePage ? 'active' : ''}`}
           >
             Home
-          </button>
-          <button onClick={() => handleNavClick('services')} className="nav-link">
+          </Link>
+          <Link
+            to="/money-transfer"
+            className={`nav-link ${location.pathname === '/money-transfer' ? 'active' : ''}`}
+          >
             Money Transfer
-          </button>
-          <button onClick={() => handleNavClick('faq')} className="nav-link">
+          </Link>
+          <Link
+            to="/contact"
+            className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+          >
             Contact Us
-          </button>
+          </Link>
+          <Link
+            to="/docs"
+            className={`nav-link ${location.pathname === '/docs' ? 'active' : ''}`}
+          >
+            Docs
+          </Link>
         </div>
 
-        {/* Login Button */}
+        {/* Auth */}
         <div className="navbar-actions">
-          <a 
-            href="https://wa.me/919999999999?text=Hello%20CreditCardPay,%20I%20want%20to%20exchange%20funds." 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="btn btn-dark btn-nav-login"
-          >
-            Login
-          </a>
+          {user ? (
+            <div className="nav-user">
+              <Link to="/profile" className="nav-user-link" title="View profile">
+                <div className="nav-avatar">{user.name.charAt(0).toUpperCase()}</div>
+                <span className="nav-user-name">{user.name}</span>
+              </Link>
+              <button type="button" className="nav-logout-btn" onClick={handleLogout} title="Logout">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="btn btn-dark btn-nav-login">
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Hamburger */}
@@ -112,13 +103,25 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div className={`navbar-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
-        <button onClick={() => { isHomePage ? window.scrollTo({ top: 0, behavior: 'smooth' }) : navigate('/'); setIsMobileMenuOpen(false); }} className="mobile-link">Home</button>
-        <button onClick={() => handleNavClick('services')} className="mobile-link">Money Transfer</button>
-        <button onClick={() => handleNavClick('faq')} className="mobile-link">Contact Us</button>
+        <Link to="/" onClick={() => isHomePage && window.scrollTo({ top: 0, behavior: 'smooth' })} className="mobile-link">Home</Link>
+        <Link to="/money-transfer" className="mobile-link">Money Transfer</Link>
+        <Link to="/contact" className="mobile-link">Contact Us</Link>
+        <Link to="/docs" className="mobile-link">Docs</Link>
         <div className="mobile-action">
-          <a href="https://wa.me/919999999999?text=Hello%20CreditCardPay,%20I%20want%20to%20exchange%20funds." target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-pill w-full">
-            Login
-          </a>
+          {user ? (
+            <>
+              <Link to="/profile" className="btn btn-secondary btn-pill w-full" style={{ marginBottom: '0.5rem' }}>
+                My Profile
+              </Link>
+              <button type="button" className="btn btn-primary btn-pill w-full" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="btn btn-primary btn-pill w-full">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

@@ -72,6 +72,11 @@
   transform: rotate(45deg);
 }
 
+/* Toggle icon is now an <img>; make it white on the active (green) state. */
+.faq-item.active .faq-toggle img {
+  filter: brightness(0) invert(1);
+}
+
 .faq-answer-wrap {
   max-height: 0;
   overflow: hidden;

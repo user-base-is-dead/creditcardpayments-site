@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 24" width="62" height="24" role="img" aria-label="Discover">
+  <rect width="62" height="24" rx="3" fill="#fff" stroke="#e6ebf1" />
+  <text x="5" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#1a1a1a">DISC</text>
+  <circle cx="35" cy="12" r="5" fill="#F76B1C" />
+  <text x="41" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#1a1a1a">VER</text>
+</svg>

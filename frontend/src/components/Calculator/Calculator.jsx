@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { whatsAppUrl } from '../../config';
 import './Calculator.css';
 
 export default function Calculator({ embedded = false }) {
@@ -18,9 +19,7 @@ export default function Calculator({ embedded = false }) {
     const computedSettlement = Math.max(0, numAmount - computedFee);
     
     let timeText = 'Instant (5 Mins)';
-    if (transferType === 'intl-transfer') {
-      timeText = '12 - 24 Hours';
-    } else if (transferType === 'upi-wallet') {
+    if (transferType === 'upi-wallet') {
       timeText = 'Instant (2 Mins)';
     }
 
@@ -51,7 +50,6 @@ export default function Calculator({ embedded = false }) {
     const formattedFee = formatCurrency(calculations.fee);
     
     let typeLabel = 'Credit Card to Bank';
-    if (transferType === 'intl-transfer') typeLabel = 'International Transfer';
     if (transferType === 'upi-wallet') typeLabel = 'UPI & Wallet Transfer';
 
     const message = `Hello CreditCardPay! I want to execute a transfer.\n\n` +
@@ -62,8 +60,7 @@ export default function Calculator({ embedded = false }) {
       `- Expected Settlement: ${calculations.time}\n\n` +
       `Please guide me with the bank transfer payment link.`;
 
-    const encodedMsg = encodeURIComponent(message);
-    window.open(`https://wa.me/919999999999?text=${encodedMsg}`, '_blank');
+    window.open(whatsAppUrl(message), '_blank');
   };
 
   return (
@@ -97,7 +94,6 @@ export default function Calculator({ embedded = false }) {
               onChange={(e) => setTransferType(e.target.value)}
             >
               <option value="cc-bank">Credit Card to Bank (0.85% Fee)</option>
-              <option value="intl-transfer">International Transfer (0.85% Fee)</option>
               <option value="upi-wallet">UPI & Wallet Settlement (0.85% Fee)</option>
             </select>
           </div>
@@ -132,11 +128,11 @@ export default function Calculator({ embedded = false }) {
           disabled={!amount || parseFloat(amount) < 100}
           className="btn btn-primary calc-proceed w-full"
         >
-          Proceed to Exchange ⚡
+          Proceed to Exchange <img src="/icons/icon-bolt-white.svg" width="14" height="14" alt="" style={{ verticalAlign: 'middle' }} />
         </button>
         
         <div className="trust-footer">
-          🔒 Secured 256-bit payment gateway. No card details stored.
+          <img src="/icons/icon-lock.svg" width="12" height="12" alt="" style={{ verticalAlign: 'middle', marginRight: '4px' }} />Secured 256-bit payment gateway. No card details stored.
         </div>
       </div>
     </div>

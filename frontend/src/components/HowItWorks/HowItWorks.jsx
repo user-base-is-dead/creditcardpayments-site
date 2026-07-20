@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import './HowItWorks.css';
 
 export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
 
   const steps = [
     {
       number: '01',
       title: 'Login Securely',
       desc: 'Enter your phone number and verify via OTP to safely access your account.',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-          <line x1="12" y1="18" x2="12.01" y2="18" />
-        </svg>
-      ),
+      iconSrc: '/icons/step-login.svg',
       visual: {
         title: 'Secure Authentication',
         fields: [
-          { icon: '📱', placeholder: '+91 98765 43210' },
-          { icon: '🔒', placeholder: '••••••' }
+          { iconSrc: '/icons/step-login.svg', placeholder: 'Mobile number' },
+          { iconSrc: '/icons/icon-lock.svg', placeholder: '••••••' }
         ],
         button: 'Verify OTP'
       }
@@ -29,17 +26,12 @@ export default function HowItWorks() {
       number: '02',
       title: 'Add Bank & Amount',
       desc: 'Enter the recipient\'s bank account details and the exact amount. Charges will be calculated instantly.',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2" />
-          <path d="M2 8h20" />
-        </svg>
-      ),
+      iconSrc: '/icons/step-bank.svg',
       visual: {
         title: 'Bank Details',
         fields: [
-          { icon: '🏦', placeholder: 'HDFC Bank - XXXX1234' },
-          { icon: '💰', placeholder: '₹ 25,000' }
+          { iconSrc: '/icons/icon-bank.svg', placeholder: 'HDFC Bank - XXXX1234' },
+          { iconSrc: '/icons/icon-money.svg', placeholder: '₹ 25,000' }
         ],
         button: 'Calculate Fee'
       }
@@ -48,17 +40,12 @@ export default function HowItWorks() {
       number: '03',
       title: 'Enter Card Details',
       desc: 'Securely input your credit card information to process the payment.',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="5" width="20" height="14" rx="2" />
-          <line x1="2" y1="10" x2="22" y2="10" />
-        </svg>
-      ),
+      iconSrc: '/icons/step-card.svg',
       visual: {
         title: 'Card Payment',
         fields: [
-          { icon: '💳', placeholder: '4242 •••• •••• 9876' },
-          { icon: '📅', placeholder: '12/28  •  CVV ***' }
+          { iconSrc: '/icons/step-card.svg', placeholder: '4242 •••• •••• 9876' },
+          { iconSrc: '/icons/icon-calendar.svg', placeholder: '12/28  •  CVV ***' }
         ],
         button: 'Pay Securely'
       }
@@ -67,16 +54,12 @@ export default function HowItWorks() {
       number: '04',
       title: 'Instant Transfer',
       desc: 'Your money is transferred instantly! Receive funds in your bank account within 5 minutes.',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      ),
+      iconSrc: '/icons/step-transfer.svg',
       visual: {
         title: 'Transfer Complete!',
         fields: [
-          { icon: '✅', placeholder: '₹24,787.50 Credited' },
-          { icon: '⚡', placeholder: 'Settled in 2 mins 14 sec' }
+          { iconSrc: '/icons/trust-check.svg', placeholder: '₹24,787.50 Credited' },
+          { iconSrc: '/icons/icon-bolt.svg', placeholder: 'Settled in 2 mins 14 sec' }
         ],
         button: 'View Receipt'
       }
@@ -107,10 +90,11 @@ export default function HowItWorks() {
               <ScrollReveal key={step.number} delay={100 * (idx + 1)}>
                 <button
                   className={`step-item ${activeStep === idx ? 'active' : ''}`}
-                  onClick={() => setActiveStep(idx)}
+                  onMouseEnter={() => setActiveStep(idx)}
+                  onClick={() => navigate(idx === 0 ? '/login' : '/money-transfer')}
                 >
                   <div className="step-icon-box">
-                    {step.icon}
+                    <img src={step.iconSrc} width="22" height="22" alt="" />
                   </div>
                   <div className="step-text">
                     <h4 className="step-title">{step.title}</h4>
@@ -127,18 +111,21 @@ export default function HowItWorks() {
             <ScrollReveal delay={200}>
               <div className="visual-card">
                 <div className="visual-card-icon">
-                  {steps[activeStep].icon}
+                  <img src={steps[activeStep].iconSrc} width="22" height="22" alt="" />
                 </div>
                 <h3 className="visual-card-title">{steps[activeStep].visual.title}</h3>
                 <div className="visual-fields">
                   {steps[activeStep].visual.fields.map((field, i) => (
                     <div key={i} className="visual-field">
-                      <span className="visual-field-icon">{field.icon}</span>
+                      <span className="visual-field-icon"><img src={field.iconSrc} width="18" height="18" alt="" /></span>
                       <span className="visual-field-text">{field.placeholder}</span>
                     </div>
                   ))}
                 </div>
-                <button className="btn btn-primary visual-btn">
+                <button
+                  className="btn btn-primary visual-btn"
+                  onClick={() => navigate(activeStep === 0 ? '/login' : '/money-transfer')}
+                >
                   {steps[activeStep].visual.button}
                 </button>
               </div>

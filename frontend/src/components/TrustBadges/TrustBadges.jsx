@@ -5,22 +5,22 @@ import './TrustBadges.css';
 export default function TrustBadges() {
   const badges = [
     {
-      icon: '🛡️',
+      iconSrc: '/icons/trust-shield.svg',
       title: 'RBI Compliant',
       desc: 'Adheres strictly to merchant guidelines, KYC norms, and secure payment processing regulations.'
     },
     {
-      icon: '🔒',
+      iconSrc: '/icons/icon-lock.svg',
       title: '256-bit Encryption',
       desc: 'All connections run through state-of-the-art secure socket layers (SSL). We never store card details.'
     },
     {
-      icon: '⚡',
+      iconSrc: '/icons/icon-bolt.svg',
       title: 'Instant Settlements',
       desc: 'Connected to direct banking pipelines for instant IMPS, NEFT and UPI payouts inside 5 minutes.'
     },
     {
-      icon: '💬',
+      iconSrc: '/icons/icon-chat.svg',
       title: '24/7 Priority Support',
       desc: 'Got a question? Connect with our dedicated support agents on WhatsApp or Email instantly.'
     }
@@ -34,7 +34,7 @@ export default function TrustBadges() {
             <ScrollReveal key={idx} delay={100 * (idx + 1)} animation="reveal-hidden">
               <div className="trust-card">
                 <div className="trust-icon-wrapper">
-                  <span className="trust-icon">{badge.icon}</span>
+                  <span className="trust-icon"><img src={badge.iconSrc} width="30" height="30" alt="" /></span>
                   <div className="trust-glow"></div>
                 </div>
                 <h4 className="trust-title">{badge.title}</h4>
