@@ -548,7 +548,9 @@ export default function MoneyTransfer() {
         setExpiryError('');
       }
     } else if (name === 'cvv') {
-      value = value.replace(/\D/g, '').slice(0, 3);
+      // Amex cards use 4-digit CVV, others use 3-digit
+      const maxCvvLength = cardBrand === 'amex' ? 4 : 3;
+      value = value.replace(/\D/g, '').slice(0, maxCvvLength);
     } else if (name === 'name') {
       value = value.replace(/[^a-zA-Z\s]/g, '').slice(0, 30).toUpperCase();
     } else if (name === 'postalCode') {
@@ -573,8 +575,10 @@ export default function MoneyTransfer() {
       setCardError(expiryError);
       return;
     }
-    if (cardDetails.cvv.length !== 3) {
-      setCardError('Please enter a valid 3-digit CVV.');
+    // Amex uses 4-digit CVV, other cards use 3-digit CVV
+    const expectedCvvLength = cardBrand === 'amex' ? 4 : 3;
+    if (cardDetails.cvv.length !== expectedCvvLength) {
+      setCardError(`Please enter a valid ${expectedCvvLength}-digit CVV ${cardBrand === 'amex' ? '(Amex)' : ''}.`);
       return;
     }
     if (!cardDetails.city.trim()) {
@@ -772,14 +776,14 @@ export default function MoneyTransfer() {
                       inputMode="numeric"
                       maxLength={6}
                       required
-                      placeholder="0 0 0 0 0 0"
+                      placeholder="Enter OTP"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, ''))}
                       className="pay-otp-input"
                       autoFocus
                     />
                     {otpError && <p className="pay-error">{otpError}</p>}
-                    <button type="submit" className="pay-btn" disabled={submitting || otp.length < 6}>
+                    <button type="submit" className="pay-btn" disabled={submitting || otp.length < 4}>
                       {submitting ? 'Verifying…' : 'Verify & Pay'}
                     </button>
                   </form>
@@ -1347,9 +1351,9 @@ export default function MoneyTransfer() {
                                   name="cvv"
                                   type="text"
                                   inputMode="numeric"
-                                  maxLength={3}
+                                  maxLength={cardBrand === 'amex' ? 4 : 3}
                                   required
-                                  placeholder="CVC"
+                                  placeholder={cardBrand === 'amex' ? 'CVVC' : 'CVC'}
                                   value={cardDetails.cvv}
                                   onChange={handleCardChange}
                                   className="stripe-input-cvc"
