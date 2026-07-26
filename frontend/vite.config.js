@@ -9,6 +9,11 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] })
   ],
   server: {
+    // nginx proxies requests through with Host: creditcardpayment.in — Vite's
+    // dev server blocks unrecognized Host headers by default, so it must be
+    // allowlisted here or every proxied request gets a 403.
+    allowedHosts: ["creditcardpayment.in", "www.creditcardpayment.in"],
+
     // During development, forward API and websocket traffic to the backend
     // (Node/Express + Socket.io on :4000) so the frontend can use same-origin
     // relative URLs like fetch('/api/...') and io().
