@@ -28,6 +28,17 @@ const config = {
   env: NODE_ENV,
   isProd: NODE_ENV === 'production',
   port: Number(process.env.PORT) || 4000,
+  // Interface to bind. Left UNSET by default, which keeps Node's behaviour of
+  // listening on every interface — changing that on a live server could cut
+  // nginx off from the API, so it stays opt-in.
+  //
+  // Recommended on a VPS where nginx runs on the same machine:
+  //   HOST=127.0.0.1
+  // That makes the API reachable only through the proxy, so nobody can hit
+  // http://<VPS_IP>:4000 directly and bypass Cloudflare + nginx.
+  // Keep it unset (or 0.0.0.0) if the API runs in a container or on a
+  // different host than the proxy.
+  host: process.env.HOST || null,
   corsOrigins: parseOrigins(process.env.CORS_ORIGIN),
   jwt: {
     secret: JWT_SECRET,

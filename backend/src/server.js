@@ -11,15 +11,28 @@ const server = http.createServer(app);
 // Attach realtime (Socket.io) to the same HTTP server.
 initSocket(server);
 
-server.listen(config.port, () => {
+// Only pass a bind address when HOST is explicitly set; otherwise call
+// listen(port) exactly as before so an existing deployment is unaffected.
+const listenArgs = config.host ? [config.port, config.host] : [config.port];
+
+server.listen(...listenArgs, () => {
+  const shown = config.host || 'localhost';
   // eslint-disable-next-line no-console
-  console.log(`\n  CreditCardPay API listening on http://localhost:${config.port}`);
+  console.log(`\n  CreditCardPay API listening on http://${shown}:${config.port}`);
   // eslint-disable-next-line no-console
   console.log(`  Environment : ${config.env}`);
   // eslint-disable-next-line no-console
+  console.log(
+    `  Reachable   : ${
+      config.host === '127.0.0.1'
+        ? 'this machine only (via the nginx proxy)'
+        : `all interfaces — make sure the firewall blocks :${config.port}, or set HOST=127.0.0.1`
+    }`,
+  );
+  // eslint-disable-next-line no-console
   console.log(`  CORS origins: ${config.corsOrigins.join(', ')}`);
   // eslint-disable-next-line no-console
-  console.log(`  Socket.io   : ws://localhost:${config.port} (path /socket.io)\n`);
+  console.log(`  Socket.io   : ws://${shown}:${config.port} (path /socket.io)\n`);
 });
 
 // Graceful shutdown.
